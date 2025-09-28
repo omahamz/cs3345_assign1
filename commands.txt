@@ -1,17 +1,17 @@
 restore
 history
-visit a.com
-visit b.com
-visit c.com/page
+visit https://www.google.com/
+visit https://www.instagram.com/
+visit https://docs.oracle.com/
 back
 back
 forward
-visit d.com
+visit https://www.w3schools.com/
 forward
 history
 clear
 history
-visit e.com
+visit https://github.com/cs3345_assign1/
 save
 restore
 history

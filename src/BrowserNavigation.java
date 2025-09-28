@@ -2,6 +2,8 @@ package src;
 
 import java.io.*;
 import java.util.EmptyStackException;
+import java.awt.Desktop;
+import java.net.URI;
 
 public class BrowserNavigation {
     private String currentPage = null;
@@ -15,6 +17,15 @@ public class BrowserNavigation {
         currentPage = url;
         history.enqueue(url);
         fwd.clear(); // new branch
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().browse(new URI(url));
+            } catch (Exception e) {
+                return "Failed to open URL in browser: " + e.getMessage();
+            }
+        } else {
+            return "Desktop browsing not supported on this platform.";
+        }
         return "Now at " + url;
     }
 
