@@ -3,6 +3,8 @@ package src;
 import java.util.Iterator;
 
 public class BrowserLinkedList<T> implements Iterable<T> {
+
+    // Node class
     private static class Node<T> {
         T data;
         Node<T> prev, next;

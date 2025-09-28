@@ -3,10 +3,10 @@ package src;
 public class BrowserArrayList<T> implements Iterable<T> {
     private Object[] data;
     private int head = 0; // index of front
-    private int size = 0;
+    private int size = 0; // n
 
     public BrowserArrayList() {
-        data = new Object[8];
+        data = new Object[8]; // starting off capacity
     }
 
     private int cap() {
@@ -14,13 +14,13 @@ public class BrowserArrayList<T> implements Iterable<T> {
     }
 
     private int idx(int i) {
-        return (head + i) % cap();
+        return (head + i) % cap(); // some smart math
     }
 
     private void ensure(int need) {
         if (need <= cap())
             return;
-        int newCap = Math.max(cap() * 2, need);
+        int newCap = Math.max(cap() * 2, need); // resizing if needed, circular array
         Object[] nd = new Object[newCap];
         for (int i = 0; i < size; i++)
             nd[i] = data[idx(i)];
@@ -38,6 +38,8 @@ public class BrowserArrayList<T> implements Iterable<T> {
     public T removeFirst() {
         if (size == 0)
             throw new java.util.NoSuchElementException();
+        // Cast needed because data is Object[]; safe in this queue since only T values
+        // are enqueued.
         @SuppressWarnings("unchecked")
         T v = (T) data[head];
         data[head] = null;
@@ -69,6 +71,7 @@ public class BrowserArrayList<T> implements Iterable<T> {
         size = 0;
     }
 
+    // Iterate from head → tail (works for queue front-to-back traversal)
     @Override
     public java.util.Iterator<T> iterator() {
         return new java.util.Iterator<T>() {

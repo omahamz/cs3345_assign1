@@ -1,0 +1,18 @@
+restore
+history
+visit a.com
+visit b.com
+visit c.com/page
+back
+back
+forward
+visit d.com
+forward
+history
+clear
+history
+visit e.com
+save
+restore
+history
+quit

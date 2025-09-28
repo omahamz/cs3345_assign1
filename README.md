@@ -37,7 +37,7 @@ javac -d out src/*.java
 java -cp out src.Main
 
 # optional: feed commands from a file
-java -cp out src.Main < commands.txt
+Get-Content .\commands.txt | java -cp out src.Main
 ```
 
 **Recognized commands:**
@@ -167,12 +167,3 @@ _Notes:_
 - **Circular array for queue**: avoids shifting; contiguous cache-friendly storage; amortized O(1).
 - **Text serialization**: human-readable, easy to debug/grade; stable across minor code changes.
 - **Iterators**: conform to `Iterable<T>`/`Iterator<T>` so `for-each` works on stacks and queue.
-
----
-
-## Optional Enhancements
-
-- **Bounded history** (cap size; drop oldest on overflow).
-- **De-duplicate consecutive visits** (don’t enqueue same URL twice in a row).
-- **Timestamps** in history (store `url|epochMillis`).
-- **Undo clear** (persist last snapshot).

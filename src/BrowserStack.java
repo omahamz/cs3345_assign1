@@ -37,8 +37,8 @@ public class BrowserStack<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        // If your grader expects a named iterator class:
+        // Special iterator class
         return new StackIterator<>(list.iterator());
-        // Otherwise, you could just: return list.iterator();
+
     }
 }

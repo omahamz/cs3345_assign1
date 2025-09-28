@@ -1,16 +1,26 @@
 package src;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.EmptyStackException;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        var br = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
-        var nav = new BrowserNavigation();
+        // Wrap standard input for easy line-by-line reading
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BrowserNavigation nav = new BrowserNavigation();
+
+        System.out.println("--------------- Simple Browser Navigation ---------------");
+        System.out.println("Commands: visit <url> | back | forward | history | clear | save | restore | quit");
+        System.out.println("---------------------------------------------------------");
+
         for (String line; (line = br.readLine()) != null;) {
+            // Regrex to split command and argument, \\s+ scans whitespace
             String[] p = line.trim().split("\\s+", 2);
             if (p.length == 0 || p[0].isEmpty())
                 continue;
+
+            // Although I despise case statements, it works well here to read commands
             switch (p[0].toLowerCase()) {
                 case "visit":
                     System.out.println(nav.visitWebsite(p.length > 1 ? p[1] : ""));
