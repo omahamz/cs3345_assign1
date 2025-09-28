@@ -16,17 +16,16 @@
 
 ```
 src/
-  browser/
     BrowserLinkedList.java     // Doubly-linked list (head/tail)
     BrowserArrayList.java      // Circular array (resizable) for queue
     BrowserStack.java          // Stack backed by BrowserLinkedList
     BrowserQueue.java          // Queue backed by BrowserArrayList
-    StackIterator.java         // Iterator (top → bottom) for stacks
+    StackIterator.java         // Iterator (top -> bottom) for stacks
     BrowserNavigation.java     // High-level browser ops
     Main.java                  // CLI driver
 ```
 
-_All files use `package browser;` at the top._
+_All files use `package src;` at the top._
 
 ---
 
@@ -34,14 +33,14 @@ _All files use `package browser;` at the top._
 
 ```bash
 # from project root
-javac -d out src/browser/*.java
-java -cp out browser.Main
+javac -d out src/*.java
+java -cp out src.Main
 
 # optional: feed commands from a file
-java -cp out browser.Main < commands.txt
+java -cp out src.Main < commands.txt
 ```
 
-**CLI commands (driver):**
+**Recognized commands:**
 
 ```
 visit <url>    | back      | forward
@@ -55,12 +54,12 @@ restore        | quit
 
 ### Data Structures
 
-- **Back Stack / Forward Stack**: `BrowserStack<T>` → `BrowserLinkedList<T>`
+- **Back Stack / Forward Stack**: `BrowserStack<T>` -> `BrowserLinkedList<T>`
 
   - `addFirst/removeFirst` on a doubly-linked list for O(1) push/pop.
-  - `StackIterator` iterates top → bottom (delegates to list iterator from `head`).
+  - `StackIterator` iterates top -> bottom (delegates to list iterator from `head`).
 
-- **History Queue**: `BrowserQueue<T>` → `BrowserArrayList<T>` (circular buffer)
+- **History Queue**: `BrowserQueue<T>` -> `BrowserArrayList<T>` (circular buffer)
   - Tracks `head` and `size`; tail index = `(head + size) % capacity`.
   - Amortized O(1) enqueue/dequeue; resizes by doubling.
 
@@ -76,8 +75,6 @@ restore        | quit
   - Reads back and repopulates structures. Human-readable and grader-friendly.
 
 ---
-
-## Public API (Key Methods)
 
 ### BrowserNavigation
 
@@ -97,14 +94,14 @@ String getCurrentPage();
 ```java
 void push(T v); T pop(); T peek();
 boolean isEmpty(); int size();
-Iterator<T> iterator();          // top → bottom
+Iterator<T> iterator();          // top -> bottom
 ```
 
 ### BrowserQueue<T>
 
 ```java
 void enqueue(T v); T dequeue(); boolean isEmpty(); int size();
-Iterator<T> iterator();          // front → back in logical order
+Iterator<T> iterator();          // front -> back in logical order
 ```
 
 ---
@@ -125,8 +122,8 @@ Iterator<T> iterator();          // front → back in logical order
 _Notes:_
 
 - Queue operations are amortized O(1) due to occasional resize.
-- `visitWebsite` clears the forward stack when branching a new path → O(n_fwd).
-- Clearing history sets array slots to `null` → O(n_hist).
+- `visitWebsite` clears the forward stack when branching a new path -> O(n_fwd).
+- Clearing history sets array slots to `null` -> O(n_hist).
 
 ---
 
@@ -134,11 +131,11 @@ _Notes:_
 
 1. **Basic Navigation**
 
-   - `visit a`, `visit b`, `visit c` → `getCurrentPage()==c`, history `a,b,c`.
+   - `visit a`, `visit b`, `visit c` -> `getCurrentPage()==c`, history `a,b,c`.
 
 2. **Back/Forward**
 
-   - From above: `back` → page `b`; `forward` → page `c`.
+   - From above: `back` -> page `b`; `forward` -> page `c`.
    - After `back` then `visit d`: forward stack must be cleared (no `forward` allowed).
 
 3. **Empty Stack Errors**
@@ -152,11 +149,11 @@ _Notes:_
 
 5. **Clear History**
 
-   - After multiple visits, `clear` → `history` shows “No browsing history available.”
+   - After multiple visits, `clear` -> `history` shows “No browsing history available.”
 
 6. **Save/Restore**
 
-   - `save` to write `session_data.txt`, restart program, `restore` → same current page, stacks, and history.
+   - `save` to write `session_data.txt`, restart program, `restore` -> same current page, stacks, and history.
 
 7. **Edge Inputs**
    - `visit` with empty string or whitespace handled gracefully (still sets as current or reject via simple check if desired).
